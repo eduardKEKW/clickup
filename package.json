@@ -8,15 +8,30 @@
   "dependencies": {
     "next": "latest",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "react-icons": "^4.4.0",
+    "tailwindcss-question-mark": "^0.1.1",
+    "tailwindcss-scoped-groups": "^2.0.0"
   },
   "devDependencies": {
     "@types/node": "17.0.35",
     "@types/react": "18.0.9",
     "@types/react-dom": "18.0.5",
+    "@typescript-eslint/eslint-plugin": "^5.39.0",
+    "@typescript-eslint/parser": "^5.39.0",
     "autoprefixer": "^10.4.7",
+    "eslint": "^8.7.0",
+    "eslint-plugin-react": "^7.31.8",
     "postcss": "^8.4.14",
+    "prettier": "^2.5.1",
+    "tailwind-scrollbar": "^2.0.1",
+    "tailwind-styled-components": "^2.2.0",
     "tailwindcss": "^3.1.2",
-    "typescript": "4.7.2"
-  }
+    "typescript": "^4.4.4"
+  },
+  "name": "clickup",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "eduardKEKW <e.eduard13@yahoo.ro>",
+  "license": "MIT"
 }
