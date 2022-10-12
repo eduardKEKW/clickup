@@ -32,7 +32,7 @@ const ListItemOptins = tw.div<any>`
     ${(props) => (props.$show ? "visible" : "invisible")}
 `;
 
-const Item = tw.div<any>`
+export const Item = tw.div<any>`
     flex
     items-center
     hover:bg-gray-200
@@ -41,17 +41,18 @@ const Item = tw.div<any>`
     text-sm
     gap-2
     w-full
+    cursor-pointer
 `;
 
-const Option = ({
+export const Option = ({
   setIsOptionsOpen,
   children,
 }: {
-  setIsOptionsOpen: (v: boolean) => void;
+  setIsOptionsOpen?: (v: boolean) => void;
   children: JSX.Element;
 }) => {
   return (
-    <Popup handleAction={(v) => setIsOptionsOpen(v)}>
+    <Popup handleAction={(v) => setIsOptionsOpen && setIsOptionsOpen(v)}>
       <>
         <Popup.Body className="w-60">
           <div className="text-sm flex flex-col gap-1">

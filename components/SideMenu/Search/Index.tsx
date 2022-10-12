@@ -40,7 +40,7 @@ export const Search = ({
 }) => {
   return (
     <Modal open={isOpen} onClose={onClose}>
-      <div className="flex shadow-modal rounded-lg min-h-[35rem] w-[60rem] max-h-[35rem]">
+      <div className="flex min-h-[35rem] w-[60rem] max-h-[35rem]">
         <div className="w-3/4 flex flex-col gap-2 border-r border-b border-gray-200">
           <SearchHeader />
           <List />

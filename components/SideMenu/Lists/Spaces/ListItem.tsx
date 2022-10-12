@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { BiDotsHorizontalRounded } from "react-icons/bi";
-import { HiOutlinePlusSm } from "react-icons/hi";
+import { useState } from "react";
 import { IoMdArrowDropright } from "react-icons/io";
 import { TbCircleDotted } from "react-icons/tb";
+import { TiCancelOutline } from "react-icons/ti";
 import tw from "tailwind-styled-components";
 import { Popup } from "../../../Helpers/Popup";
 import { ToolTip } from "../../../Helpers/Tooltip";
@@ -11,7 +10,7 @@ import { ChildrenList } from "../../Search/Filters/Item";
 import { items } from "./Index";
 import { Options } from "./Options";
 
-const ListItemBody = tw.div<any>`
+export const ListItemBody = tw.div<any>`
     flex 
     items-center 
     py-[0.45rem] 
@@ -27,22 +26,53 @@ const ListItemBody = tw.div<any>`
         : "hover:bg-gray-200"}
 `;
 
-const ColorSelectBtn = () => {
-  const [showColorsOptions, setShowColorsOptions] = useState<boolean>(false);
+const colors = [
+  {
+    id: 1,
+    color: "bg-red-600",
+  },
+  {
+    id: 2,
+    color: "bg-yellow-600",
+  },
+  {
+    id: 3,
+    color: "bg-green-600",
+  },
+];
 
+const ColorSelectBtn = () => {
   return (
     <div className="">
       <Popup>
         <>
           <Popup.Content>
-            <ToolTip text="List Color">
-              <div className="">
-                <TbCircleDotted className="w-2 h-2 hover:text-black-900" />
-              </div>
-            </ToolTip>
+            <div>
+              <ToolTip text="List Color">
+                <div className="">
+                  <TbCircleDotted className="w-2 h-2 hover:text-black-900" />
+                </div>
+              </ToolTip>
+            </div>
           </Popup.Content>
           <Popup.Body>
-            <div className="">ddas</div>
+            <div className="flex flex-col items-center gap-2 p-1">
+              <div className="flex gap-4 items-center">
+                <span className="text-gray-300 cursor-pointer">
+                  <TiCancelOutline />
+                </span>
+                {colors.map(({ id, color }) => {
+                  return (
+                    <span
+                      className={`w-3 h-3 rounded-sm cursor-pointer ${color}`}
+                    ></span>
+                  );
+                })}
+              </div>
+              <div className="text-center w-full text-gray-400 text-xs border border-dotted border-b-gray-600 cursor-pointer hover:text-blue-600">
+                Add/Remove Colors
+              </div>
+            </div>
           </Popup.Body>
         </>
       </Popup>
@@ -88,7 +118,7 @@ export const ListItem = ({
               text="Shows Everything from all Lists in this Space"
             >
               <div className="">
-                <Link href="#" onClick={() => setIsActive(item.id)}>
+                <Link href="#">
                   <span
                     className="hover:underline decoration-dotted"
                     onClick={() => setIsActive(item.id)}

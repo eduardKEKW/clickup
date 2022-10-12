@@ -21,7 +21,7 @@ module.exports = {
     require("tailwind-scrollbar"),
     require("tailwindcss-question-mark"),
     require("tailwindcss-scoped-groups")({
-      groups: ["sidebar", "item", "accordeon", "tooltip"],
+      groups: ["sidebar", "item", "accordeon", "tooltip", "sidecontrol"],
     }),
     require("tailwindcss/plugin")(function ({ addVariant }) {
       addVariant("em", ({ container }) => {

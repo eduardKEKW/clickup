@@ -12,7 +12,7 @@ import tw from "tailwind-styled-components";
 const AccordionBody = tw.div<any>`
     flex 
     flex-col
-    transition-all
+    transition-[height]
     duration-300
     overflow-hidden 
     ${(props) => (props.$open ? "h-[100%]" : "h-0")}

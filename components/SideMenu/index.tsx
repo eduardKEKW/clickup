@@ -6,53 +6,149 @@ import { ToolTip } from "../Helpers/Tooltip";
 import { SettingsButton } from "./SettingsButton";
 import { MenuSearch } from "./Search";
 import { Navigation } from "./Navigation";
-import { Spaces } from "./Lists/Spaces/Index";
+import { Lists } from "./Lists/Index";
+import { AiOutlineQuestionCircle, AiOutlineUsergroupAdd } from "react-icons/ai";
+import { GiStarsStack } from "react-icons/gi";
+import { useEffect, useState } from "react";
+import { TailwindComponent } from "tailwind-styled-components/dist/tailwind";
 
 const MenuLeftContainer = tw.div<any>`
-    border
-    border-l-gray-200
-    w-72
-    flex-none
-    h-screen
-    bg-white
-    shadow-md
-    group-sidebar
+  flex-none
+  group-sidebar
+  flex
+  transition-[width, opacity]
+  duration-150
+  overflow-hidden
+  opacity-0
+  w-0 
 `;
 
-export const MenuLeft = () => {
-  return (
-    <MenuLeftContainer>
-      <div className="flex flex-col">
-        <div className="flex items-center justify-between justify-items-center h-12 mx-2">
-          <div className="flex gap-2 items-center justify-between cursor-pointer">
-            <div className="h-6 w-5 relative">
-              <Image src={logo} layout="fill" />
-            </div>
-            <div className="text-gray-700 text-lg font-extrabold subpixel-antialiased">
-              ClickUp
-            </div>
-          </div>
-          <div className="flex gap-2">
-            <SettingsButton />
+const MenuLeftContainerMinified = tw(MenuLeftContainer)<any>`
+  absolute
+  left-0
+  top-[3rem]
+  scrollbar-thin
+  rounded-lg
+  opacity-100
+  z-10
+  border-t-[2rem]
+  -mt-3
+  border-t-transparent
+  w-72
+  overflow-visible
+`;
 
-            <ToolTip
-              text="Collapse sidebar (q)"
-              className="cursor-pointer p-1 hover:bg-gray-100"
-            >
-              <div className="flex items-center">
-                <ArrowRigthSvg className="w-3 h-3 fill-violet-500 stroke-violet-500 rotate-180 -mr-2" />
-                <ArrowRigthSvg className="w-3 h-3 fill-violet-500 stroke-violet-500 rotate-180" />
+const MenuLeftContainerFull = tw(MenuLeftContainer)<any>`
+  w-72
+  overflow-visible
+  opacity-100
+  h-screen
+`;
+
+const Menu: { [key: string]: TailwindComponent<any> } = {
+  full: MenuLeftContainerFull,
+  minified: MenuLeftContainerMinified,
+  hide: MenuLeftContainer,
+};
+
+export const MenuLeft = ({ show: showMenuState, setShowMenu }: any) => {
+  const [currentState, setCurrentState] = useState<string>("hide");
+  const [isMenuHover, setIsMenuHover] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isMenuHover && currentState == "minified") {
+      setCurrentState("minified");
+    } else {
+      setCurrentState(showMenuState);
+    }
+  }, [showMenuState, isMenuHover]);
+
+  const MenuBody = Menu[currentState];
+
+  return (
+    <MenuBody
+      state={currentState}
+      onMouseOver={() => setIsMenuHover(true)}
+      onMouseLeave={() => setIsMenuHover(false)}
+    >
+      <div
+        className={`flex flex-col w-full bg-white shadow-modal h-auto  ${
+          currentState == "minified" && "rounded-lg"
+        }`}
+      >
+        <div
+          className={`scrollbar-thin h-auto ${
+            currentState == "minified" && "overflow-y-scroll"
+          }`}
+        >
+          {currentState == "full" && (
+            <div className="flex items-center justify-between justify-items-center h-12 mx-2">
+              <div className="flex gap-2 items-center justify-between cursor-pointer">
+                <div className="h-6 w-5 relative">
+                  <Image src={logo} layout="fill" />
+                </div>
+                <div className="text-gray-700 text-lg font-extrabold subpixel-antialiased">
+                  ClickUp
+                </div>
               </div>
-            </ToolTip>
-          </div>
+              <div className="flex gap-2">
+                <SettingsButton />
+
+                <ToolTip
+                  text="Collapse sidebar (q)"
+                  className="cursor-pointer p-1 hover:bg-gray-100"
+                >
+                  <div
+                    onClick={() => setShowMenu("hide")}
+                    className="flex items-center hover:bg-gray-200 cursor-pointer p-1 rounded-md"
+                  >
+                    <ArrowRigthSvg className="w-3 h-3 fill-violet-500 stroke-violet-500 rotate-180 -mr-2" />
+                    <ArrowRigthSvg className="w-3 h-3 fill-violet-500 stroke-violet-500 rotate-180" />
+                  </div>
+                </ToolTip>
+              </div>
+            </div>
+          )}
+
+          <MenuSearch />
+
+          <Navigation />
+
+          <Lists />
         </div>
 
-        <MenuSearch />
+        <div
+          className={`flex items-end px-2 ${currentState == "full" && "grow"}`}
+        >
+          <div className="flex items-center justify-between border-t border-gray-200 w-full">
+            <div className="flex items-center justify-between p-2">
+              <ToolTip text="args Worksspace" direction="right">
+                <span className="cursor-pointer z-10 w-7 h-7 text-xs rounded-full bg-green-400 text-white text-center leading-7">
+                  E
+                </span>
+              </ToolTip>
+              <span className="cursor-pointer w-7 h-7 text-xs rounded-full bg-blue-400 text-white text-center leading-7 relative -translate-x-2">
+                EA
+              </span>
+            </div>
 
-        <Navigation />
+            <div className="flex gap-2">
+              <ToolTip text="invite user" direction="top">
+                <button className="flex items-center outline-none gap-1 bg-gray-200 h-6 p-2 rounded-md text-xs text-gray-500">
+                  <AiOutlineUsergroupAdd /> Invite
+                </button>
+              </ToolTip>
 
-        <Spaces />
+              <ToolTip text="upgrade" direction="top">
+                <button className="flex items-center outline-none gap-1 bg-gray-200 h-6 p-2 rounded-md text-xs text-gray-500">
+                  <GiStarsStack /> Invite
+                </button>
+              </ToolTip>
+            </div>
+            <AiOutlineQuestionCircle className="hover:text-violet-600 cursor-pointer" />
+          </div>
+        </div>
       </div>
-    </MenuLeftContainer>
+    </MenuBody>
   );
 };

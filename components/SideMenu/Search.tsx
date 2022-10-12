@@ -7,7 +7,7 @@ export const MenuSearch = () => {
 
   return (
     <div
-      className="flex items-center bg-gray-100 rounded-sm p-2 px-3 text-xs gap-2 cursor-pointer text-gray-500 hover:text-violet-500 m-2"
+      className="flex items-center bg-gray-100 rounded-sm p-2 px-3 text-xs gap-2 cursor-pointer text-gray-500 hover:text-violet-500 m-2 mt-3"
       onClick={() => setIsOpen(true)}
     >
       <FaSearch />

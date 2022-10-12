@@ -4,7 +4,9 @@ import { CgLayoutGridSmall } from "react-icons/cg";
 import { TiDelete } from "react-icons/ti";
 import tw from "tailwind-styled-components";
 import { Accodion } from "../../../Helpers/Accordion";
+import { Modal } from "../../../Helpers/Modal";
 import { ToolTip } from "../../../Helpers/Tooltip";
+import { CreateNewSpace } from "./Create";
 import { ListItem } from "./ListItem";
 
 export const items = [
@@ -54,10 +56,11 @@ const SearchContainer = tw.div<any>`
     bg-white 
     z-10 
     text-gray-700
-    transition-[transform]
+    transition-[opacity]
     duration-100
-    scale-0
-    ${(props) => (props.$isOpen ? "visible scale-100" : "invisible")}
+    opacity-0
+    ${(props) =>
+      props.$isOpen ? "visible scale-100 opacity-100" : "invisible scale-0"}
 `;
 
 export const Spaces = () => {
@@ -72,7 +75,7 @@ export const Spaces = () => {
             {({ isOpen }) => (
               <div className={` text-xs ${isOpen && "text-gray-700"}`}>
                 <div className="flex justify-between pr-2">
-                  <span className="text-sm font-semibold">SPACES</span>
+                  <span className="text-xs font-semibold">SPACES</span>
                   {isOpen && (
                     <BiSearch
                       onClick={(e) => {
@@ -107,10 +110,7 @@ export const Spaces = () => {
           <Accodion.Body>
             {/* New Space btn */}
             <div className="w-full mb-4">
-              <button className="w-64 mx-auto bg-gray-200 text-center center gap-2 text-gray-500 text-xs py-1 mt-2 mb-1 rounded-md h-6">
-                <BiPlus className="stroke-2" />
-                MEW SPACE
-              </button>
+              <CreateNewSpace />
               {/* Show Evrything Btn */}
               <ToolTip text="Show Everything">
                 <div className="w-full flex p-1 px-4 text-md items-center gap-2 hover:bg-gray-100 cursor-pointer text-gray-700 text-sm">

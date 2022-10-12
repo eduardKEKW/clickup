@@ -40,10 +40,20 @@ const ToolTipLefttBody = tw(ToolTipBody)`
     after:border-r-gray-700
 `;
 
+const ToolTipTopBody = tw(ToolTipBody)`
+    ${(props) => props.$show && "visible"}
+    after:left-1/2
+    after:top-full
+    after:-translate-x-[50%]
+    after:border-x-transparent 
+    after:border-t-transparent
+    after:border-t-gray-700
+`;
+
 const options = {
   bottom: ToolTipBottomBody,
   right: ToolTipRightBody,
-  top: ToolTipLefttBody,
+  top: ToolTipTopBody,
   left: ToolTipLefttBody,
 };
 

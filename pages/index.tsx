@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import { useState } from "react";
 
 import tw from "tailwind-styled-components";
 import { Header } from "../components/Header";
@@ -16,6 +17,10 @@ const HomePage = tw.main<any>`
 `;
 
 const Home: NextPage = () => {
+  const [showMenu, setShowMenu] = useState<"full" | "minified" | "hide">(
+    "hide"
+  );
+
   return (
     <HomePage>
       <Head>
@@ -24,9 +29,11 @@ const Home: NextPage = () => {
       </Head>
 
       <Container>
-        <MenuLeft />
+        <MenuLeft show={showMenu} setShowMenu={setShowMenu} />
+
+        <div id="sidebar"></div>
         <div className="grow">
-          <Header />
+          <Header setShowMenu={setShowMenu} showMenu={showMenu} />
           <footer className="flex h-24 w-full items-center justify-center border-t"></footer>
         </div>
       </Container>
