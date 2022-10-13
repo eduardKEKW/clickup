@@ -64,6 +64,7 @@ const ColorSelectBtn = () => {
                 {colors.map(({ id, color }) => {
                   return (
                     <span
+                      key={id}
                       className={`w-3 h-3 rounded-sm cursor-pointer ${color}`}
                     ></span>
                   );

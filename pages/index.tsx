@@ -1,11 +1,10 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import { useState } from "react";
 
 import tw from "tailwind-styled-components";
 import { Header } from "../components/Header";
-import { MenuLeft } from "../components/SideMenu";
+import { Menu, MenuLeft } from "../components/SideMenu";
 
 const Container = tw.div<any>`
   flex
@@ -17,9 +16,7 @@ const HomePage = tw.main<any>`
 `;
 
 const Home: NextPage = () => {
-  const [showMenu, setShowMenu] = useState<"full" | "minified" | "hide">(
-    "hide"
-  );
+  const [showMenu, setShowMenu] = useState<keyof typeof Menu>("full");
 
   return (
     <HomePage>
@@ -32,8 +29,15 @@ const Home: NextPage = () => {
         <MenuLeft show={showMenu} setShowMenu={setShowMenu} />
 
         <div id="sidebar"></div>
+
         <div className="grow">
           <Header setShowMenu={setShowMenu} showMenu={showMenu} />
+
+          <div className="flex w-full bg-gray-100">
+            <div className="w-full">contente</div>
+            <div id="assigness" className=""></div>
+          </div>
+
           <footer className="flex h-24 w-full items-center justify-center border-t"></footer>
         </div>
       </Container>

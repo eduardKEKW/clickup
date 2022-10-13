@@ -10,7 +10,6 @@ import { Lists } from "./Lists/Index";
 import { AiOutlineQuestionCircle, AiOutlineUsergroupAdd } from "react-icons/ai";
 import { GiStarsStack } from "react-icons/gi";
 import { useEffect, useState } from "react";
-import { TailwindComponent } from "tailwind-styled-components/dist/tailwind";
 
 const MenuLeftContainer = tw.div<any>`
   flex-none
@@ -20,39 +19,32 @@ const MenuLeftContainer = tw.div<any>`
   duration-150
   overflow-hidden
   opacity-0
-  w-0 
-`;
-
-const MenuLeftContainerMinified = tw(MenuLeftContainer)<any>`
-  absolute
-  left-0
-  top-[3rem]
-  scrollbar-thin
-  rounded-lg
-  opacity-100
+  w-0
   z-10
-  border-t-[2rem]
-  -mt-3
-  border-t-transparent
-  w-72
-  overflow-visible
+  ${(props) => {
+    if (props.state == "minified") {
+      return " absolute left-0 top-[3rem] scrollbar-thin rounded-lg opacity-100 z-10 border-t-[2rem] -mt-3 border-t-transparent w-72 overflow-visible";
+    }
+
+    if (props.state == "full") {
+      return " w-72 overflow-visible opacity-100 h-screen";
+    }
+
+    return "";
+  }}
 `;
 
-const MenuLeftContainerFull = tw(MenuLeftContainer)<any>`
-  w-72
-  overflow-visible
-  opacity-100
-  h-screen
-`;
+export enum Menu {
+  full,
+  hide,
+  minified,
+}
 
-const Menu: { [key: string]: TailwindComponent<any> } = {
-  full: MenuLeftContainerFull,
-  minified: MenuLeftContainerMinified,
-  hide: MenuLeftContainer,
-};
-
-export const MenuLeft = ({ show: showMenuState, setShowMenu }: any) => {
-  const [currentState, setCurrentState] = useState<string>("hide");
+export const MenuLeft = ({
+  show: showMenuState = "full",
+  setShowMenu,
+}: any) => {
+  const [currentState, setCurrentState] = useState<keyof typeof Menu>("full");
   const [isMenuHover, setIsMenuHover] = useState<boolean>(false);
 
   useEffect(() => {
@@ -63,16 +55,14 @@ export const MenuLeft = ({ show: showMenuState, setShowMenu }: any) => {
     }
   }, [showMenuState, isMenuHover]);
 
-  const MenuBody = Menu[currentState];
-
   return (
-    <MenuBody
+    <MenuLeftContainer
       state={currentState}
       onMouseOver={() => setIsMenuHover(true)}
       onMouseLeave={() => setIsMenuHover(false)}
     >
       <div
-        className={`flex flex-col w-full bg-white shadow-modal h-auto  ${
+        className={`flex flex-col w-full bg-white shadow-md h-auto  ${
           currentState == "minified" && "rounded-lg"
         }`}
       >
@@ -149,6 +139,6 @@ export const MenuLeft = ({ show: showMenuState, setShowMenu }: any) => {
           </div>
         </div>
       </div>
-    </MenuBody>
+    </MenuLeftContainer>
   );
 };

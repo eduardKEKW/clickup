@@ -2,6 +2,7 @@ import { AiOutlineStar } from "react-icons/ai";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { BsPin } from "react-icons/bs";
 import { HiOutlinePencil } from "react-icons/hi";
+import { IoIosArrowForward } from "react-icons/io";
 import tw from "tailwind-styled-components";
 import { Accodion } from "../../Helpers/Accordion";
 import { Popup } from "../../Helpers/Popup";
@@ -60,12 +61,19 @@ export const Lists = () => {
                 <div className="flex justify-between pr-2">
                   <span className="text-xs font-semibold">FAVORITE</span>
                 </div>
+                <div className="flex items-center gap-2">
+                  <ToolTip text="Pin Favorites to the Top">
+                    <div>
+                      <BsPin className={`w-3 h-3 ${isOpen && "visible"}`} />
+                    </div>
+                  </ToolTip>
 
-                <ToolTip text="Pin Favorites to the Top">
-                  <div>
-                    <BsPin className={`w-3 h-3 ${isOpen && "visible"}`} />
-                  </div>
-                </ToolTip>
+                  <IoIosArrowForward
+                    className={`transition-[transform] duration-200 ${
+                      isOpen ? "rotate-90" : "rotate-0"
+                    }`}
+                  />
+                </div>
               </div>
             )}
           </Accodion.Header>
@@ -89,8 +97,14 @@ export const Lists = () => {
                   isOpen && "text-gray-700"
                 }`}
               >
-                <div className="flex justify-between pr-2">
+                <div className="flex justify-between pr-2 w-full">
                   <span className="text-xs font-semibold">DASHBOARD</span>
+
+                  <IoIosArrowForward
+                    className={`transition-[transform] duration-200 ${
+                      isOpen ? "rotate-90" : "rotate-0"
+                    }`}
+                  />
                 </div>
               </div>
             )}
@@ -112,8 +126,14 @@ export const Lists = () => {
                   isOpen && "text-gray-700"
                 }`}
               >
-                <div className="flex justify-between pr-2">
+                <div className="flex justify-between pr-2 w-full">
                   <span className="text-xs font-semibold">DOCS</span>
+
+                  <IoIosArrowForward
+                    className={`transition-[transform] duration-200 ${
+                      isOpen ? "rotate-90" : "rotate-0"
+                    }`}
+                  />
                 </div>
               </div>
             )}

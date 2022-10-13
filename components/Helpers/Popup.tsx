@@ -15,20 +15,22 @@ import { useOnClickOutside } from "../../hooks/useClickOutside";
 const PopUpContext = createContext<{
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  parentPosRef: any | null;
+  parentPosRef: React.MutableRefObject<any>;
 }>({
   open: false,
   setOpen: () => null,
-  parentPosRef: null,
+  parentPosRef: { current: {} },
 });
 
 export const Popup = ({
   children,
   handleAction = () => null,
+  show = false,
 }: {
   children: JSX.Element;
   className?: string;
   handleAction?: (v: boolean) => void;
+  show?: boolean;
 }) => {
   const [open, setOpen] = useState<boolean>(false);
   const parentPosRef = useRef({ x: 0, y: 0 });
@@ -36,6 +38,10 @@ export const Popup = ({
   useEffect(() => {
     handleAction(open);
   }, [open]);
+
+  useEffect(() => {
+    setOpen(show);
+  }, [show]);
 
   return (
     <PopUpContext.Provider
@@ -65,16 +71,18 @@ const PopUpBody = tw.div<any>`
     ease-in-out
     transition-[transform]
     duration-75
-    z-50
+    z-40
     ${(props) => (props.$show ? "scale-100" : "scale-0")}
 `;
 
 Popup.Body = ({
   children,
   className,
+  ignorePopup = false,
 }: {
   children: JSX.Element;
   className?: string;
+  ignorePopup?: boolean;
 }) => {
   const { open, setOpen, parentPosRef } = useContext(PopUpContext);
   const popUpRef = useRef<HTMLElement>(null);
@@ -88,6 +96,7 @@ Popup.Body = ({
 
   useOnClickOutside({
     ref: popUpRef,
+    ignorePopup,
     handler: () => setOpen(false),
   });
 
@@ -98,8 +107,8 @@ Popup.Body = ({
           // @ts-ignore
           <PopUpBody
             style={{
-              top: `${parentPosRef.current.y + 15}px`,
-              left: `${parentPosRef.current.x}px`,
+              top: `${parentPosRef?.current?.y + 15}px`,
+              left: `${parentPosRef?.current?.x}px`,
             }}
             ref={popUpRef}
             $show={open}

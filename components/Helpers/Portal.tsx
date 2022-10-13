@@ -1,12 +1,14 @@
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 export const Portal = ({
   children,
   parent,
+  disable = false,
 }: {
   children: JSX.Element;
   parent: string;
+  disable?: boolean;
 }) => {
   const [mounted, setMounted] = useState<boolean>(false);
 
@@ -16,7 +18,7 @@ export const Portal = ({
     return () => setMounted(false);
   }, []);
 
-  return mounted ? (
+  return !disable && mounted ? (
     createPortal(<>{children}</>, document.getElementById(parent) as Element)
   ) : (
     <></>

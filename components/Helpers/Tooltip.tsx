@@ -7,8 +7,9 @@ const ToolTipBody = tw.div<any>`
     invisible
     absolute
     group-tooltip-hover:visible
-    w-auto whitespace-nowrap px-2 py-1 bg-gray-700 rounded-md text-center text-white text-xs 
+    w-auto whitespace-wrap px-2 py-1 bg-gray-700 rounded-md text-center text-white text-xs 
     after:content-[''] after:absolute after:border-8 after:border-transparent
+    max-w-[15rem]
     z-50
 `;
 
@@ -33,11 +34,11 @@ const ToolTipRightBody = tw(ToolTipBody)`
 
 const ToolTipLefttBody = tw(ToolTipBody)`
     ${(props) => props.$show && "visible"}
-    after:left-0
-    after:-translate-x-[80%]
-    after:border-y-transparent 
-    after:border-b-transparent
-    after:border-r-gray-700
+    after:left-full
+    after:-translate-x-[10%]
+    after:border-x-transparent 
+    after:border-y-transparent
+    after:border-l-gray-700
 `;
 
 const ToolTipTopBody = tw(ToolTipBody)`
@@ -64,6 +65,9 @@ const getPoint = ({
   space,
 }: any): { x: number; y: number } => {
   const pt = { x: 0, y: 0 };
+
+  if (!tt || !el) return pt;
+
   const elRect = el.getBoundingClientRect();
 
   switch (direction) {

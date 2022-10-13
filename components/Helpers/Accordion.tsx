@@ -5,6 +5,7 @@ import {
   Dispatch,
   SetStateAction,
   useContext,
+  useEffect,
   useState,
 } from "react";
 import tw from "tailwind-styled-components";
@@ -28,11 +29,17 @@ const AccordeonContext = createContext<{
 export const Accodion = ({
   children,
   className,
+  isOpen: isOpenProps = false,
 }: {
   children: JSX.Element;
   className?: string;
+  isOpen?: boolean;
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsOpen(isOpenProps);
+  }, [isOpenProps]);
 
   return (
     <AccordeonContext.Provider
@@ -71,11 +78,6 @@ Accodion.Header = ({
       <div className="grow">
         {typeof children === "function" ? children({ isOpen }) : children}
       </div>
-      <IoIosArrowForward
-        className={`transition-[transform] duration-200 ${
-          isOpen ? "rotate-90" : "rotate-0"
-        }`}
-      />
     </div>
   );
 };
