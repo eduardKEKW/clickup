@@ -35,6 +35,7 @@ export const SearchOptions = () => {
               {filters.map((filter) => {
                 return (
                   <div
+                    key={filter.id}
                     onClick={() => setSelectedFilter(filter.id)}
                     className="cursor-pointer p-1 px-2 hover:bg-gray-100 rounded-md flex justify-between items-center text-sm"
                   >
