@@ -11,7 +11,7 @@ export const SearchBtn = () => {
   const [searchTerm, setSearhcTerm] = useState<string>("");
 
   return (
-    <div className="flex items-center gap-2 mx-3">
+    <div className="flex items-center gap-2 mx-3 grow">
       <AiOutlineSearch className="w-5 h-5" />
       <input
         value={searchTerm}

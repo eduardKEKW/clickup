@@ -5,6 +5,7 @@ import { useState } from "react";
 import tw from "tailwind-styled-components";
 import { Header } from "../components/Header";
 import { Menu, MenuLeft } from "../components/SideMenu";
+import { Tasks } from "../components/Tasks";
 
 const Container = tw.div<any>`
   flex
@@ -34,8 +35,8 @@ const Home: NextPage = () => {
           <Header setShowMenu={setShowMenu} showMenu={showMenu} />
 
           <div className="flex w-full bg-gray-100">
-            <div className="w-full">contente</div>
-            <div id="assigness" className=""></div>
+            <Tasks />
+            <div id="assigness"></div>
           </div>
 
           <footer className="flex h-24 w-full items-center justify-center border-t"></footer>

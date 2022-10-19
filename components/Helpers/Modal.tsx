@@ -13,7 +13,7 @@ const ModalContainer = tw.div<any>`
     -translate-x-1/2
     max-h-full
     min-w-64
-    z-50
+    z-20
 `;
 
 export const Modal = ({

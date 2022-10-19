@@ -73,8 +73,11 @@ export const Spaces = () => {
       <Accodion className="divide-y group-accordeon">
         <>
           <Accodion.Header className="text-gray-400 p-3 hover:bg-gray-100 relative">
-            {({ isOpen }) => (
-              <div className={` text-xs ${isOpen && "text-gray-700"}`}>
+            {({ isOpen, setIsOpen }) => (
+              <div
+                onClick={() => setIsOpen((v) => !v)}
+                className={` text-xs ${isOpen && "text-gray-700"}`}
+              >
                 <div className="flex justify-between pr-2">
                   <span className="text-xs font-semibold">SPACES</span>
                   {isOpen && (

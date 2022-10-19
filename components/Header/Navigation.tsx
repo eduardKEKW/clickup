@@ -10,7 +10,7 @@ export const Navigation = ({ showMenu, setShowMenu }: any) => {
   return (
     <>
       {/* Side Menu */}
-      <div className="flex gap-2 text-xs items-stretch h-full text-gray-500">
+      <div className="flex gap-2 text-xs items-stretch h-full text-gray-500 grow">
         {showMenu !== "full" && (
           <div
             onClick={() => setShowMenu("full")}
@@ -55,7 +55,7 @@ export const Navigation = ({ showMenu, setShowMenu }: any) => {
           <div className="flex items-center gap-2 h-full group border-transparent border-8 border-b-2 border-b-violet-700 cursor-pointer text-violet-700">
             <div className="flex gap-2 items-center">
               <AiOutlineMenuUnfold className="text-lg" />
-              <span>List</span>
+              <span>List View</span>
             </div>
 
             <Option>

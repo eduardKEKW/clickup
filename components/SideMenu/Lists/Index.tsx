@@ -52,8 +52,9 @@ export const Lists = () => {
       <Accodion className="divide-y group-accordeon group">
         <>
           <Accodion.Header className="text-gray-400 p-3 hover:bg-gray-100 relative">
-            {({ isOpen }) => (
+            {({ isOpen, setIsOpen }) => (
               <div
+                onClick={() => setIsOpen((v) => !v)}
                 className={`flex justify-between items-center pr-2 text-xs ${
                   isOpen && "text-gray-700"
                 }`}
@@ -91,8 +92,9 @@ export const Lists = () => {
       <Accodion className="divide-y group-accordeon group">
         <>
           <Accodion.Header className="text-gray-400 p-3 hover:bg-gray-100 relative">
-            {({ isOpen }) => (
+            {({ isOpen, setIsOpen }) => (
               <div
+                onClick={() => setIsOpen((v) => !v)}
                 className={`flex justify-between items-center pr-2 text-xs ${
                   isOpen && "text-gray-700"
                 }`}
@@ -120,8 +122,9 @@ export const Lists = () => {
       <Accodion className="divide-y group-accordeon group">
         <>
           <Accodion.Header className="text-gray-400 p-3 hover:bg-gray-100 relative">
-            {({ isOpen }) => (
+            {({ isOpen, setIsOpen }) => (
               <div
+                onClick={() => setIsOpen((v) => !v)}
                 className={`flex justify-between items-center pr-2 text-xs ${
                   isOpen && "text-gray-700"
                 }`}

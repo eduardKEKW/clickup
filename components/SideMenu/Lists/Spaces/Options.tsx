@@ -42,6 +42,7 @@ export const Item = tw.div<any>`
     gap-2
     w-full
     cursor-pointer
+    transition-[background]
 `;
 
 export const Option = ({
@@ -54,7 +55,7 @@ export const Option = ({
   return (
     <Popup handleAction={(v) => setIsOptionsOpen && setIsOptionsOpen(v)}>
       <>
-        <Popup.Body className="w-60">
+        <Popup.Body ignorePopup={true} className="w-60">
           <div className="text-sm flex flex-col gap-1">
             <Popup>
               <>

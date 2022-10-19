@@ -52,7 +52,7 @@ const AutomateBtn = () => {
           <Popup.Content>
             <div className="flex items-center gap-1 group-hover:bg-gray-200 p-1">
               <TbRobot className="w-4 h-4" />
-              <span>Automate</span>
+              <span className="lg:block sm:hidden">Automate</span>
             </div>
           </Popup.Content>
         </>

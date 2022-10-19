@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 import {
   AiOutlineSearch,
   AiOutlineUser,
@@ -7,6 +7,7 @@ import {
 import { FiUsers } from "react-icons/fi";
 import { MdCancel } from "react-icons/md";
 import { RiCheckboxCircleFill } from "react-icons/ri";
+import { useOnClickOutside } from "../../../../hooks/useClickOutside";
 import { Accodion } from "../../../Helpers/Accordion";
 import { Portal } from "../../../Helpers/Portal";
 import { ToggleBtn } from "../../../Helpers/Toggle";
@@ -96,6 +97,13 @@ export const Assignees = ({
   isAssignesMenuOpen: boolean;
   setIsAssignesMenuOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
+  const assignessMenuRef = useRef<HTMLDivElement>(null);
+
+  useOnClickOutside({
+    ref: assignessMenuRef,
+    handler: () => setIsAssignesMenuOpen(false),
+  });
+
   return (
     <>
       <div
@@ -116,7 +124,10 @@ export const Assignees = ({
       </div>
 
       <Portal parent="assigness" disable={!isAssignesMenuOpen}>
-        <div className="border border-gray-200 shadow-md w-60 h-[calc(100vh-3rem)] relative -top-8 pb-8 p-3 bg-white flex flex-col">
+        <div
+          ref={assignessMenuRef}
+          className="border border-gray-200 shadow-md w-60 h-[calc(100vh-3rem)] relative -top-8 pb-8 p-3 bg-white flex flex-col"
+        >
           <div className="flex justify-between items-center">
             <span className="text-gray-600 text-lg">Assignees</span>
 
@@ -126,7 +137,7 @@ export const Assignees = ({
               direction="left"
             >
               <div
-                // onClick={() => setShowMenu("hide")}
+                onClick={() => setIsAssignesMenuOpen(false)}
                 className="flex items-center hover:bg-gray-200 cursor-pointer p-1 rounded-md"
               >
                 <ArrowRigthSvg className="w-4 h-4 fill-violet-500 stroke-violet-500 -mr-3" />
@@ -150,14 +161,19 @@ export const Assignees = ({
             <Accodion isOpen={true} className="h-1/2">
               <>
                 <Accodion.Header>
-                  <div className="flex items-center justify-between text-xs mt-5 group cursor-pointer">
-                    <span className="text-gray-400 group-hover:text-violet-400">
-                      ASSIGNESS
-                    </span>
-                    <span className="text-violet-400 hover:underline">
-                      select all
-                    </span>
-                  </div>
+                  {({ setIsOpen }) => (
+                    <div
+                      onClick={() => setIsOpen((v) => !v)}
+                      className="flex items-center justify-between text-xs mt-5 group cursor-pointer"
+                    >
+                      <span className="text-gray-400 group-hover:text-violet-400">
+                        ASSIGNESS
+                      </span>
+                      <span className="text-violet-400 hover:underline">
+                        select all
+                      </span>
+                    </div>
+                  )}
                 </Accodion.Header>
                 <Accodion.Body>
                   <Users />
@@ -168,14 +184,19 @@ export const Assignees = ({
             <Accodion isOpen={false}>
               <>
                 <Accodion.Header>
-                  <div className="flex items-center justify-between text-xs mt-5 group cursor-pointer">
-                    <span className="text-gray-400 group-hover:text-violet-400">
-                      TEAMS
-                    </span>
-                    <span className="text-violet-400 hover:underline">
-                      select all
-                    </span>
-                  </div>
+                  {({ setIsOpen }) => (
+                    <div
+                      onClick={() => setIsOpen((v) => !v)}
+                      className="flex items-center justify-between text-xs mt-5 group cursor-pointer"
+                    >
+                      <span className="text-gray-400 group-hover:text-violet-400">
+                        TEAMS
+                      </span>
+                      <span className="text-violet-400 hover:underline">
+                        select all
+                      </span>
+                    </div>
+                  )}
                 </Accodion.Header>
                 <Accodion.Body>
                   <div className="w-full text-center text-sm h-1/2">

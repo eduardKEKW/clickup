@@ -47,34 +47,31 @@ export const Subtasks = ({}: {}) => {
 
             {items.map((item) => {
               const ItemBody = () => (
-                <>
-                  <Item
-                    onClick={() => setSelectedGroupById(item.id)}
-                    key={item.id}
-                  >
-                    <span className="grow">
-                      {item.name}{" "}
-                      {item?.descriptiom && (
-                        <span className="text-xs text-gray-400 whitespace-pre">
-                          {item.descriptiom}
-                        </span>
-                      )}
-                    </span>
-                    {selectedGroupById == item.id && (
-                      <BsCheckLg className="font-bold text-blue-600" />
+                <Item onClick={() => setSelectedGroupById(item.id)}>
+                  <span className="grow">
+                    {item.name}{" "}
+                    {item?.descriptiom && (
+                      <span className="text-xs text-gray-400 whitespace-pre">
+                        {item.descriptiom}
+                      </span>
                     )}
-                  </Item>
-                </>
+                  </span>
+                  {selectedGroupById == item.id && (
+                    <BsCheckLg className="font-bold text-blue-600" />
+                  )}
+                </Item>
               );
 
               return item.tooltip ? (
-                <ToolTip text={item.tooltip} direction="left">
-                  <div>
-                    <ItemBody />
-                  </div>
-                </ToolTip>
+                <div key={item.id}>
+                  <ToolTip key={item.id} text={item.tooltip} direction="left">
+                    <div>
+                      <ItemBody />
+                    </div>
+                  </ToolTip>
+                </div>
               ) : (
-                <ItemBody />
+                <ItemBody key={item.id} />
               );
             })}
           </div>

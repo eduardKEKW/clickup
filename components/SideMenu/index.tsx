@@ -21,9 +21,10 @@ const MenuLeftContainer = tw.div<any>`
   opacity-0
   w-0
   z-10
+
   ${(props) => {
     if (props.state == "minified") {
-      return " absolute left-0 top-[3rem] scrollbar-thin rounded-lg opacity-100 z-10 border-t-[2rem] -mt-3 border-t-transparent w-72 overflow-visible";
+      return " max-h-[35rem] absolute left-0 top-[3rem] scrollbar-thin rounded-lg opacity-100 z-10 border-t-[2rem] -mt-3 border-t-transparent w-72 overflow-visible";
     }
 
     if (props.state == "full") {

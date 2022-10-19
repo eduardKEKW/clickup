@@ -1,5 +1,3 @@
-import { IoIosArrowForward } from "react-icons/io";
-
 import {
   createContext,
   Dispatch,
@@ -65,18 +63,20 @@ Accodion.Header = ({
 }: {
   children:
     | JSX.Element
-    | ((prosp: { isOpen: boolean | undefined }) => JSX.Element);
+    | ((prosp: {
+        isOpen: boolean | undefined;
+        setIsOpen: Dispatch<SetStateAction<boolean>>;
+      }) => JSX.Element);
   className?: string;
 }) => {
   const { isOpen, setIsOpen } = useContext(AccordeonContext);
 
   return (
-    <div
-      onClick={() => setIsOpen((v) => !v)}
-      className={`flex cursor-pointer ${className}`}
-    >
+    <div className={`flex cursor-pointer ${className}`}>
       <div className="grow">
-        {typeof children === "function" ? children({ isOpen }) : children}
+        {typeof children === "function"
+          ? children({ isOpen, setIsOpen })
+          : children}
       </div>
     </div>
   );
